@@ -99,4 +99,4 @@ class UserAPI extends DataSource {
     }
 }
 
-module.exports = userAPI;
+module.exports = UserAPI;
