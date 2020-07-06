@@ -28,16 +28,10 @@ class UserAPI extends DataSource {
                 where: { email }
             }
         );
-        // console.log('*******************');
-        // console.log(users[0]);
-        // console.log('*******************');
         return (users && users[0]) ? users[0] : null;
     }
 
     async bookTrips({ launchIds }) {
-        console.log('**********************')
-        console.log(this.context.user);
-        console.log('**********************')
         const userId = this.context.user.id;
         if (!userId) return;
         let bookedTrips = [];
