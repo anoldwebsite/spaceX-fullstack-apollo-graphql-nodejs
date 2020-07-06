@@ -21,21 +21,28 @@ class UserAPI extends DataSource {
         const email = (this.context && this.context.user)
             ? this.context.user.email
             : emailArg;
-        if (!email || !isEmail.validate(emailArg)) return null;
-        const users = this.store.users.findOrCreate(
+        if (!email || !isEmail.validate(email)) return null;
+
+        const users = await this.store.users.findOrCreate(
             {
                 where: { email }
             }
         );
+        // console.log('*******************');
+        // console.log(users[0]);
+        // console.log('*******************');
         return (users && users[0]) ? users[0] : null;
     }
 
     async bookTrips({ launchIds }) {
+        console.log('**********************')
+        console.log(this.context.user);
+        console.log('**********************')
         const userId = this.context.user.id;
         if (!userId) return;
         let bookedTrips = [];
         for (const launchId of launchIds) {
-            const res = await this.bookTrips({ launchId });
+            const res = await this.bookTrip({ launchId });
             if (res) bookedTrips.push(res);
         }
         return bookedTrips;
