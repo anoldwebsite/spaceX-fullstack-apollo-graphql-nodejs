@@ -13,13 +13,15 @@ A scalar type is primitive e.g., ID, String, Boolean, Int.
 The scalar types
 resolves to a single value.
 */
-const typeDefs = `
-    type Launch{
+//isBooked: Boolean! //with ! after Boolean, Launch.isBooked. GraphQL error: Cannot return null for non-nullable field 
+//isBooked: Boolean //Without ! after Boolean Loads the launches but the individual detail page of launches is not shown.
+const typeDefs = gql`
+    type Launch {
         id: ID!
         site: String
         mission: Mission 
         rocket: Rocket
-        isBooked: Boolean! 
+        isBooked: Boolean 
     }
     type Rocket {
         id: ID!
@@ -29,6 +31,7 @@ const typeDefs = `
     type User{
         id: ID!
         email: String!
+        profileImage: String
         trips: [Launch]!
     }
     type Mission {
